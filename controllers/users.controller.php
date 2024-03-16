@@ -37,7 +37,9 @@ class UsersController
 
                             $_SESSION["id"] = $result["id_user"];
                             $_SESSION["username"] = $result["username_user"];
-                            $_SESSION["displayname"] = $result["displayname_user"];
+                            $_SESSION["name"] = $result["name_user"];
+                            $_SESSION["lastname"] = $result["lastname_user"];
+                            $_SESSION["displayname"] = $result["name_user"] . " " . $result["lastname_user"];
                             $_SESSION["picture"] = $result["picture_user"];
                             $_SESSION["rol"] = $result["rol_user"];
 
@@ -51,5 +53,14 @@ class UsersController
                 }
             }
         }
+    }
+
+
+    static public function viewProfile() {
+        
+        $id = $_SESSION["id"];
+        return UsersModel::viewProfile($id);
+
+        
     }
 }
