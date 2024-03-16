@@ -39,49 +39,51 @@ session_start();
 <body class="hold-transition skin-blue sidebar-mini login-page">
 
     <!-- Site wrapper -->
-    <div class="wrapper">
-
-        <?php
-
-        if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
-
-            // Header
-            include "modules/header.php";
-
-            // Left side column. contains the sidebar
-            include "modules/menu.php";
-
-
-            $url = array();
-
-            // Validamos si viene una variable get url
-            if (isset($_GET["url"])) {
-                // Dividimos el contenido de la variable get
-                $url = explode("/", $_GET["url"]);
-
-                // Preguntamos si en el indice 0 esta el dashboard
-                if ($url[0] === "home") {
-                    include "modules/" . $url[0] . ".php";
-                }
-            } else {
-                include "modules/home.php";
-            }
-        }
-
-        ?>
-
-    </div>
 
     <?php
 
-    if (isset($_GET["url"])) {
+    if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
 
-        if ($_GET["url"] === "dashboard") {
+        echo '<div class="wrapper">';
+
+        // Header
+        include "modules/header.php";
+
+        // Left side column. contains the sidebar
+        include "modules/menu.php";
+
+
+        $url = array();
+
+        // Validamos si viene una variable get url
+        if (isset($_GET["url"])) {
+            // Dividimos el contenido de la variable get
+            $url = explode("/", $_GET["url"]);
+
+            // Preguntamos si en el indice 0 esta el dashboard
+            if ($url[0] === "home" || $url[0] === "logout") {
+                include "modules/" . $url[0] . ".php";
+            }
+        } else {
+            include "modules/home.php";
+        }
+
+        echo "</div>";
+    } else {
+        if (isset($_GET["url"])) {
+
+            if ($_GET["url"] === "login") {
+                include "modules/login.php";
+
+                return;
+            }
+
             include "modules/dashboard.php";
-        } else if ($_GET["url"] === "login") {
-            include "modules/login.php";
+        } else {
+            include "modules/dashboard.php";
         }
     }
+
 
     ?>
 
