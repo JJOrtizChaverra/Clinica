@@ -2,7 +2,7 @@
 
 class Connection {
 
-    public function connection() {
+    static public function connection() {
 
         $database = new PDO("mysql:host=localhost;dbname=clinica;", "root", "");
 
