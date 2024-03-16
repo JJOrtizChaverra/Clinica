@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -72,7 +78,7 @@
 
         if ($_GET["url"] === "dashboard") {
             include "modules/dashboard.php";
-        } else if($_GET["url"] === "login") {
+        } else if ($_GET["url"] === "login") {
             include "modules/login.php";
         }
     }
@@ -81,8 +87,10 @@
 
     <!-- jQuery 3 -->
     <script src="./views/bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap 3.3.7 -->
     <script src="./views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- SlimScroll -->
     <script src="./views/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
