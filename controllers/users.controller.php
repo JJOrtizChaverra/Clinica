@@ -37,6 +37,7 @@ class UsersController
 
                             $_SESSION["id"] = $result["id_user"];
                             $_SESSION["username"] = $result["username_user"];
+                            $_SESSION["displayname"] = $result["displayname_user"];
                             $_SESSION["picture"] = $result["picture_user"];
                             $_SESSION["rol"] = $result["rol_user"];
 
