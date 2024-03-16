@@ -72,6 +72,8 @@
 
         if ($_GET["url"] === "dashboard") {
             include "modules/dashboard.php";
+        } else if($_GET["url"] === "login") {
+            include "modules/login.php";
         }
     }
 
