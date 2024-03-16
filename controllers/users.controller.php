@@ -59,8 +59,10 @@ class UsersController
     static public function viewProfile() {
         
         $id = $_SESSION["id"];
-        return UsersModel::viewProfile($id);
+        return UsersModel::viewProfile($id);        
+    }
 
+    public function editProfile() {
         
     }
 }
