@@ -10,7 +10,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>Clinica Medica</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -61,7 +61,11 @@ session_start();
             $url = explode("/", $_GET["url"]);
 
             // Preguntamos si en el indice 0 esta el dashboard
-            if ($url[0] === "home" || $url[0] === "logout") {
+            if (
+                $url[0] === "home" ||
+                $url[0] === "logout" ||
+                $url[0] === "profile"
+            ) {
                 include "modules/" . $url[0] . ".php";
             }
         } else {
