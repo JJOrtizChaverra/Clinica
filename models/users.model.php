@@ -22,4 +22,19 @@ class UsersModel extends Connection
             return $e->getMessage();
         }
     }
+
+    static public function viewProfile($id) {
+        try {
+            $pdo = Connection::connection()->prepare("SELECT * FROM users WHERE id_user = :id_user");
+
+            $pdo->bindParam(":id_user", $id, PDO::PARAM_INT);
+
+            $pdo->execute();
+
+            return $pdo->fetch();
+            
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }
