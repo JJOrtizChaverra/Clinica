@@ -1,7 +1,5 @@
 <?php
 
-require_once "models/users.model.php";
-
 class UsersController
 {
 
