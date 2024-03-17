@@ -44,7 +44,6 @@ class ConsultingRoomsModel extends Connection
                 $pdo->execute();
 
                 return $pdo->fetch();
-                
             } else {
                 $pdo = Connection::connection()->prepare("SELECT * FROM consulting_rooms");
 
@@ -54,6 +53,29 @@ class ConsultingRoomsModel extends Connection
             }
         } catch (Exception $e) {
             return $e->getMessage();
+        }
+    }
+
+
+    // Eliminar consultorio
+
+    static public function deleteConsultingRoom($id)
+    {
+        try {
+            $pdo = Connection::connection()->prepare("DELETE FROM consulting_rooms WHERE 
+            id_consulting_room = :id_consulting_room");
+
+            $pdo->bindParam(":id_consulting_room", $id, PDO::PARAM_INT);
+
+
+            $pdo->execute();
+
+            $pdo = null;
+
+            return true;
+        } catch (Exception $e) {
+            $pdo = null;
+            return false;
         }
     }
 }
