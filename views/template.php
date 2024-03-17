@@ -107,6 +107,10 @@ session_start();
     <script src="<?php echo Template::path(); ?>views/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo Template::path(); ?>views/dist/js/demo.js"></script>
+
+    <!-- Javascript propio -->
+    <script src="<?php echo Template::path(); ?>views/js/main.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.sidebar-menu').tree()
