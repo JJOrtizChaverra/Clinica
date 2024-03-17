@@ -1,18 +1,3 @@
-<?php
-
-if (
-    $_SESSION["rol"] === "secretary" ||
-    $_SESSION["rol"] === "doctor" ||
-    $_SESSION["rol"] === "patient" ||
-    $_SESSION["rol"] === "admin"
-) {
-
-    $profile = UsersController::viewProfile();
-
-}
-
-?>
-
 <header class="main-header">
     <!-- Logo -->
     <a href="./views/index2.html" class="logo">
@@ -37,9 +22,9 @@ if (
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <?php if ($profile["picture_user"] !== null) : ?>
+                        <?php if ($_SESSION["picture"] !== null) : ?>
 
-                            <img src="<?php echo Template::path(); ?>views/assets/img/<?php echo $profile["rol_user"]; ?>/<?php echo $profile["picture_user"]; ?>" class="user-image" alt="<?php echo $_SESSION["displayname"]; ?>">
+                            <img src="<?php echo Template::path(); ?>views/assets/img/<?php echo $_SESSION["rol"]; ?>/<?php echo $_SESSION["picture"]; ?>" class="user-image" alt="<?php echo $_SESSION["displayname"]; ?>">
 
                         <?php else : ?>
 
