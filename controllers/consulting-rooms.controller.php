@@ -21,4 +21,14 @@ class ConsultingRoomsController {
 
     }
 
+
+    // Traer consultorios
+    static public function viewConsultingRooms($column, $value) {
+        
+        $result = ConsultingRoomsModel::viewConsultingRooms($column, $value);
+
+        return $result;
+
+    }
+
 }
