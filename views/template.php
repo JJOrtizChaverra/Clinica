@@ -66,7 +66,8 @@ session_start();
                 $url[0] === "logout" ||
                 $url[0] === "profile" ||
                 $url[0] === "edit-profile" ||
-                $url[0] === "consulting-room"
+                $url[0] === "consulting-room" ||
+                $url[0] === "edit-consulting-room"
             ) {
                 include "modules/" . $url[0] . ".php";
             }
