@@ -77,8 +77,13 @@ if ($_SESSION["rol"] !== "secretary") {
 
                                     <div class="btn-group">
 
-                                        <button style="margin-right: 12px;" class="btn btn-success"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                        <a href="<?php Template::path(); ?>edit-consulting-room">
+                                            <button style="margin-right: 12px;" class="btn btn-success"><i class="fa fa-pencil"></i></button>
+                                        </a>
+
+                                        <a href="<?php Template::path(); ?>consulting-room&id=<?php echo $consultingRoom["id_consulting_room"]; ?>">
+                                            <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                        </a>
 
                                     </div>
 
@@ -98,3 +103,8 @@ if ($_SESSION["rol"] !== "secretary") {
     </section>
 
 </div>
+
+<?php
+
+$deleteConsultingRoom = new ConsultingRoomsController();
+$deleteConsultingRoom -> deleteConsultingRoom();
