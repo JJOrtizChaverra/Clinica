@@ -65,14 +65,13 @@ session_start();
                 $url[0] === "home" ||
                 $url[0] === "logout" ||
                 $url[0] === "profile" ||
-                $url[0] === "edit-profile" ||
                 $url[0] === "consulting-room" ||
-                $url[0] === "edit-consulting-room"
+                $url[0] === "doctors"
             ) {
-                include "modules/" . $url[0] . ".php";
+                include "modules/".$url[0]."/" . $url[0] . ".php";
             }
         } else {
-            include "modules/home.php";
+            include "modules/home/home.php";
         }
 
         echo "</div>";
@@ -81,7 +80,7 @@ session_start();
         if (isset($_GET["url"])) {
 
             if ($_GET["url"] === "login") {
-                include "modules/login.php";
+                include "modules/login/login.php";
 
                 return;
             }

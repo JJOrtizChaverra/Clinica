@@ -64,9 +64,13 @@ class UsersController
     public function editProfile($rol)
     {
 
-        if (isset($_POST["profile-id"]) && isset($_POST["profile-name"])) {
+        if (
+            isset($_GET["id"]) &&
+            isset($_POST["profile-name"]) &&
+            isset($_POST["profile-lastname"])
+        ) {
 
-            $pathImage = $_POST["current-img"];
+            $pathImage = $_POST["current-image"];
 
             if (empty($pathImage)) {
                 $pathImage = null;
@@ -74,8 +78,8 @@ class UsersController
 
             if (isset($_FILES["profile-image"]["tmp_name"]) && !empty($_FILES["profile-image"]["tmp_name"])) {
 
-                if (!empty($_POST["current-img"])) {
-                    unlink("views/assets/img/$rol/" . $_POST["current-img"]);
+                if (!empty($_POST["current-image"])) {
+                    unlink("views/assets/img/$rol/" . $_POST["current-image"]);
                 }
             }
 
@@ -109,10 +113,11 @@ class UsersController
             $result = UsersModel::editProfile($data);
 
             if ($result) {
-                
+
                 $_SESSION["picture"] = $pathImage;
                 $_SESSION["name"] = $_POST["profile-name"];
                 $_SESSION["lastname"] = $_POST["profile-lastname"];
+                $_SESSION["displayname"] = $_POST["profile-name"] . " " . $_POST["profile-lastname"];
 
                 echo "<script>window.location = '" . Template::path() . "profile'</script>";
             } else {
@@ -123,22 +128,21 @@ class UsersController
 
     public function changePassword()
     {
-        if(isset($_POST["profile-id"]) && isset($_POST["profile-new-password"])) {
+        if (isset($_GET["id"]) && isset($_POST["profile-new-password"])) {
             if (preg_match("/^[0-9a-zA-Z]{8,}$/", $_POST["profile-new-password"])) {
 
-            $data = array(
-                "id" => $_SESSION["id"],
-                "password" =>  $_POST["profile-new-password"]
-            );
+                $data = array(
+                    "id" => $_SESSION["id"],
+                    "password" =>  $_POST["profile-new-password"]
+                );
 
-            $result = UsersModel::changePassword($data);
+                $result = UsersModel::changePassword($data);
 
-            if($result) {
-                echo "<script>window.location = '" . Template::path() . "profile'</script>";
-            } else {
-                echo "<p class='text-red text-center' role='alert'>Error al cambiar la contraseña</p>";
-            }
-
+                if ($result) {
+                    echo "<script>window.location = '" . Template::path() . "profile'</script>";
+                } else {
+                    echo "<p class='text-red text-center' role='alert'>Error al cambiar la contraseña</p>";
+                }
             } else {
                 echo "<p class='text-red text-center' role='alert'>Contraseña no valida</p>";
             }

@@ -7,7 +7,11 @@ if (
     $_SESSION["rol"] === "admin"
 ) {
 
-    $profile = UsersController::viewProfile();
+    if (!isset($_GET["id"]) && !$_GET["id"] == $_SESSION["id"]) {
+        echo "<script>window.location = '" . Template::path() . "home'</script>";
+        return;
+    }
+    
 } else {
     echo "<script>window.location = '" . Template::path() . "home'</script>";
     return;
@@ -16,6 +20,24 @@ if (
 ?>
 
 <div class="content-wrapper">
+    <section class="content-header">
+        <?php if ($_SESSION["rol"] === "secretary") : ?>
+            <h1>Gestor de perfil - <b>Secretaria</b></h1>
+        <?php endif ?>
+
+        <?php if ($_SESSION["rol"] === "doctor") : ?>
+            <h1>Gestor de perfil - <b>Doctor</b></h1>
+        <?php endif ?>
+
+        <?php if ($_SESSION["rol"] === "patient") : ?>
+            <h1>Gestor de perfil - <b>Paciente</b></h1>
+        <?php endif ?>
+
+        <?php if ($_SESSION["rol"] === "admin") : ?>
+            <h1>Gestor de perfil - <b>Administrador</b></h1>
+        <?php endif ?>
+    </section>
+
     <section class="content">
         <div class="box">
             <div class="box-body">
@@ -24,23 +46,25 @@ if (
 
                     <div class="col-md-6 col-xs-12">
                         <div class="form-group">
+                            <label for="document">Documento</label>
+                            <input type="text" class="form-control input-lg" id="document" value="<?php echo $_SESSION["username"]; ?>" readonly disabled required>
+                        </div>
+                        <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" class="form-control input-lg" name="profile-name" id="name" value="<?php echo $profile["name_user"]; ?>" required>
-
-                            <input type="hidden" class="form-control input-lg" name="profile-id" value="<?php echo $profile["id_user"]; ?>">
+                            <input type="text" class="form-control input-lg" name="profile-name" id="name" value="<?php echo $_SESSION["name"]; ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="lastname">Apellido</label>
-                            <input type="text" class="form-control input-lg" name="profile-lastname" id="lastname" value="<?php echo $profile["lastname_user"]; ?>" required>
+                            <input type="text" class="form-control input-lg" name="profile-lastname" id="lastname" value="<?php echo $_SESSION["lastname"]; ?>" required>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-xs-12">
                         <div class="form-group text-center">
                             <label for="image">
-                                <?php if ($profile["picture_user"] !== null) : ?>
+                                <?php if ($_SESSION["picture"] !== null) : ?>
 
-                                    <td><img id="container-image" src="<?php echo Template::path(); ?>views/assets/img/<?php echo $profile["rol_user"]; ?>/<?php echo $profile["picture_user"]; ?>" class="img-responsive img-circle" alt="<?php echo $_SESSION["displayname"]; ?>" width="150"></td>
+                                    <td><img id="container-image" src="<?php echo Template::path(); ?>views/assets/img/<?php echo $_SESSION["rol"]; ?>/<?php echo $_SESSION["picture"]; ?>" class="img-responsive img-circle" alt="<?php echo $_SESSION["displayname"]; ?>" width="150"></td>
 
                                 <?php else : ?>
 
@@ -50,22 +74,26 @@ if (
                             </label>
 
                             <input type="file" id="image" name="profile-image" style="margin: 0 auto;" onchange="showPicture(event)">
-                            <input type="hidden" name="current-img" value="<?php echo $profile["picture_user"]; ?>">
+                            <input type="hidden" name="current-image" value="<?php echo $_SESSION["picture"]; ?>">
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <button style="margin-bottom: 8px;" type="submit" class="btn btn-success">Guardar</button>
+                        <button style="margin-bottom: 8px; margin-right: 8px;" type="submit" class="btn btn-success">Guardar</button>
+
+                        <a href="<?php echo Template::path(); ?>home">
+                            <button style="margin-bottom: 8px;" type="button" class="btn btn-danger">Cancelar</button>
+                        </a>
 
                         <div>
-                            <a type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Cambiar contraseña</a>
+                            <a type="button" class="btn" data-toggle="modal" data-target="#modal-change-password" data-whatever="@mdo">Cambiar contraseña</a>
                         </div>
                     </div>
 
                     <?php
 
                     $editProfile = new UsersController();
-                    $editProfile->editProfile($profile["rol_user"]);
+                    $editProfile->editProfile($_SESSION["rol"]);
 
                     ?>
                 </form>
@@ -76,7 +104,7 @@ if (
 
 <!-- Modal para cambiar contraseña -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<div class="modal fade" id="modal-change-password" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -88,8 +116,6 @@ if (
                     <div class="form-group">
                         <label for="new-password">Nueva contraseña</label>
                         <input type="password" class="form-control input-lg" name="profile-new-password" id="new-password" required>
-
-                        <input type="hidden" class="form-control input-lg" name="profile-id" value="<?php echo $profile["id_user"]; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">

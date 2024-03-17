@@ -38,7 +38,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?php echo Template::path(); ?>profile" class="btn btn-primary btn">Perfil</a>
+                                <a href="<?php echo Template::path(); ?>profile&id=<?php echo $_SESSION["id"]; ?>" class="btn btn-primary btn">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="<?php echo Template::path(); ?>logout" class="btn btn-danger btn">Salir</a>
