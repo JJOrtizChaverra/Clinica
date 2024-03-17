@@ -1,9 +1,17 @@
 <?php
 
-if (isset($_SESSION["rol"]) && $_SESSION["rol"] !== "secretary") {
+if ($_SESSION["rol"] !== "secretary") {
     echo "<script>window.location = '" . Template::path() . "home'</script>";
 
     return;
+} else {
+
+    // Trayendo los consultorios
+
+    $column = null;
+    $value = null;
+
+    $consultingRooms = ConsultingRoomsController::viewConsultingRooms($column, $value);
 }
 
 ?>
@@ -31,10 +39,10 @@ if (isset($_SESSION["rol"]) && $_SESSION["rol"] !== "secretary") {
                     </div>
 
                     <?php
-                    
+
                     $newConsultingRoom = new ConsultingRoomsController();
-                    $newConsultingRoom -> createConsultingRoom();
-                    
+                    $newConsultingRoom->createConsultingRoom();
+
                     ?>
 
                 </form>
@@ -59,22 +67,26 @@ if (isset($_SESSION["rol"]) && $_SESSION["rol"] !== "secretary") {
 
                     <tbody>
 
-                        <tr>
+                        <?php foreach ($consultingRooms as $key => $consultingRoom) : ?>
 
-                            <td>1</td>
-                            <td>Cardiologia</td>
-                            <td>
+                            <tr>
 
-                                <div class="btn-group">
+                                <td><?php echo ($key + 1); ?></td>
+                                <td><?php echo $consultingRoom["name_consulting_room"]; ?></td>
+                                <td>
 
-                                    <button style="margin-right: 12px;" class="btn btn-success"><i class="fa fa-pencil"></i></button>
-                                    <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                                    <div class="btn-group">
 
-                                </div>
+                                        <button style="margin-right: 12px;" class="btn btn-success"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
-                            </td>
+                                    </div>
 
-                        </tr>
+                                </td>
+
+                            </tr>
+
+                        <?php endforeach; ?>
 
                     </tbody>
 
