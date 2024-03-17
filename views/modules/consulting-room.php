@@ -30,6 +30,13 @@ if (isset($_SESSION["rol"]) && $_SESSION["rol"] !== "secretary") {
 
                     </div>
 
+                    <?php
+                    
+                    $newConsultingRoom = new ConsultingRoomsController();
+                    $newConsultingRoom -> createConsultingRoom();
+                    
+                    ?>
+
                 </form>
 
             </div>
