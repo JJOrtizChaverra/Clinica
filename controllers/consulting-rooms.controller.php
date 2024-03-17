@@ -31,4 +31,24 @@ class ConsultingRoomsController {
 
     }
 
+
+    // Eliminar consultorio
+    public function deleteConsultingRoom() {
+
+        if(isset($_GET["id"])) {
+            
+            $id = $_GET["id"];
+
+            $result = ConsultingRoomsModel::deleteConsultingRoom($id);
+
+            if($result) {
+                echo "<script>window.location = '".Template::path()."consulting-room'</script>";
+            } else {
+                echo "<script>alert('Error al eliminar el consultorio')</script>";
+            }
+
+        }
+
+    }
+
 }
