@@ -48,7 +48,8 @@ if (
                             <td><?php echo $profile["lastname_user"]; ?></td>
 
                             <?php if ($profile["picture_user"] !== null) : ?>
-                                <td><img src="<?php echo Template::path(); ?>views/assets/img/users/<?php echo $profile["picture_user"]; ?>" class="img-responsive img-circle" alt="<?php echo $_SESSION["displayname"]; ?>" width="25"></td>
+
+                                <td><img src="<?php echo Template::path(); ?>views/assets/img/<?php echo $profile["rol_user"]; ?>/<?php echo $profile["picture_user"]; ?>" class="img-responsive img-circle" alt="<?php echo $_SESSION["displayname"]; ?>" width="25"></td>
                             <?php else : ?>
 
                                 <td><img src="<?php echo Template::path(); ?>views/assets/img/default.jpg" class="img-responsive img-circle" alt="<?php echo $_SESSION["displayname"]; ?>" width="25"></td>
