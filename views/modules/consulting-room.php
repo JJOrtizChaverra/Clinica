@@ -77,7 +77,8 @@ if ($_SESSION["rol"] !== "secretary") {
 
                                     <div class="btn-group">
 
-                                        <a href="<?php Template::path(); ?>edit-consulting-room">
+                                        <a href="<?php Template::path(); ?>edit-consulting-room&id=<?php echo $consultingRoom["id_consulting_room"]; ?>">
+
                                             <button style="margin-right: 12px;" class="btn btn-success"><i class="fa fa-pencil"></i></button>
                                         </a>
 
@@ -107,4 +108,6 @@ if ($_SESSION["rol"] !== "secretary") {
 <?php
 
 $deleteConsultingRoom = new ConsultingRoomsController();
-$deleteConsultingRoom -> deleteConsultingRoom();
+$deleteConsultingRoom->deleteConsultingRoom();
+
+?>
