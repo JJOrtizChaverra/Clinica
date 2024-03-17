@@ -59,6 +59,33 @@ class ConsultingRoomsModel extends Connection
 
     // Eliminar consultorio
 
+    static public function editConsultingRoom($data)
+    {
+        try {
+
+            $pdo = Connection::connection()->prepare("UPDATE consulting_rooms SET
+            name_consulting_room = :name_consulting_room
+            WHERE
+            id_consulting_room = :id_consulting_room");
+
+            $pdo->bindParam(":id_consulting_room", $data["id"], PDO::PARAM_INT);
+            $pdo->bindParam(":name_consulting_room", $data["name"], PDO::PARAM_STR);
+
+            $pdo->execute();
+
+            $pdo = null;
+
+            return true;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+
+    // Eliminar consultorio
+
     static public function deleteConsultingRoom($id)
     {
         try {
