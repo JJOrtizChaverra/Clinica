@@ -56,13 +56,94 @@ class UsersController
     }
 
 
-    static public function viewProfile() {
-        
+    static public function viewProfile()
+    {
+
         $id = $_SESSION["id"];
-        return UsersModel::viewProfile($id);        
+        return UsersModel::viewProfile($id);
     }
 
-    public function editProfile() {
-        
+    public function editProfile($rol)
+    {
+
+        if (isset($_POST["profile-id"]) && isset($_POST["profile-name"])) {
+
+            $pathImage = $_POST["current-img"];
+
+            if (empty($pathImage)) {
+                $pathImage = null;
+            }
+
+            if (isset($_FILES["profile-image"]["tmp_name"]) && !empty($_FILES["profile-image"]["tmp_name"])) {
+
+                if (!empty($_POST["current-img"])) {
+                    unlink("views/assets/img/$rol/" . $_POST["current-img"]);
+                }
+            }
+
+            if ($_FILES["profile-image"]["type"] === "image/jpeg") {
+
+                $nameImage = mt_rand(10, 99);
+                $pathImage = "s-" . $nameImage . ".jpg";
+
+                $image = imagecreatefromjpeg($_FILES["profile-image"]["tmp_name"]);
+
+                imagejpeg($image, "views/assets/img/$rol/$pathImage");
+            }
+
+            if ($_FILES["profile-image"]["type"] === "image/png") {
+
+                $nameImage = mt_rand(10, 99);
+                $pathImage = "s-" . $nameImage . ".jpg";
+
+                $image = imagecreatefrompng($_FILES["profile-image"]["tmp_name"]);
+
+                imagepng($image, "views/assets/img/$rol/$pathImage");
+            }
+
+            $data = array(
+                "id" => $_SESSION["id"],
+                "name" => $_POST["profile-name"],
+                "lastname" => $_POST["profile-lastname"],
+                "picture" => $pathImage
+            );
+
+            $result = UsersModel::editProfile($data);
+
+            if ($result) {
+                
+                $_SESSION["picture"] = $pathImage;
+                $_SESSION["name"] = $_POST["profile-name"];
+                $_SESSION["lastname"] = $_POST["profile-lastname"];
+
+                echo "<script>window.location = '" . Template::path() . "profile'</script>";
+            } else {
+                echo "<p class='text-red text-center' role='alert'>Error al actualizar la información</p>";
+            }
+        }
+    }
+
+    public function changePassword()
+    {
+        if(isset($_POST["profile-id"]) && isset($_POST["profile-new-password"])) {
+            if (preg_match("/^[0-9a-zA-Z]{8,}$/", $_POST["profile-new-password"])) {
+
+            $data = array(
+                "id" => $_SESSION["id"],
+                "password" =>  $_POST["profile-new-password"]
+            );
+
+            $result = UsersModel::changePassword($data);
+
+            if($result) {
+                echo "<script>window.location = '" . Template::path() . "profile'</script>";
+            } else {
+                echo "<p class='text-red text-center' role='alert'>Error al cambiar la contraseña</p>";
+            }
+
+            } else {
+                echo "<p class='text-red text-center' role='alert'>Contraseña no valida</p>";
+            }
+        }
     }
 }
