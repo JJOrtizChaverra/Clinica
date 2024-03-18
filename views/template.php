@@ -25,6 +25,10 @@ session_start();
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/skins/_all-skins.min.css">
 
+    <!-- Data table -->
+    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -125,11 +129,14 @@ session_start();
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo Template::path(); ?>views/dist/js/demo.js"></script>
 
+    <!-- Data table -->
+    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
     <!-- Javascript propio -->
     <script src="<?php echo Template::path(); ?>views/js/main.js"></script>
-
-    <!-- Javascript de doctores -->
-    <script src="<?php echo Template::path(); ?>views/js/doctors.js"></script>
 
     <script>
         $(document).ready(function() {

@@ -36,7 +36,7 @@ if ($_SESSION["rol"] === "secretary") {
 
             <div class=" box-body">
 
-                    <table class="table table-bordered table-hover table-striped" id="table-consulting-rooms">
+                    <table class="table table-bordered table-hover table-striped data-table">
 
                         <thead>
 
