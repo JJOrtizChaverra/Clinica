@@ -77,7 +77,7 @@ session_start();
                 $url[0] === "create-consulting-room" ||
                 $url[0] === "edit-consulting-room"
             ) {
-                // Consulting rooms
+                // Consultorios
                 include "modules/consulting-rooms/" . $url[0] . ".php";
 
             } else if (
@@ -85,8 +85,17 @@ session_start();
                 $url[0] === "create-doctor" ||
                 $url[0] === "edit-doctor"
             ) {
-                // Doctors
+                // Doctores
                 include "modules/doctors/" . $url[0] . ".php";
+
+            } else if (
+                $url[0] === "patients" ||
+                $url[0] === "create-patient" ||
+                $url[0] === "edit-patient"
+            ) {
+                // Pacientes
+                include "modules/patients/" . $url[0] . ".php";
+
             } else {
                 include "modules/404/404.php";
             }
