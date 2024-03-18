@@ -64,11 +64,27 @@ session_start();
             if (
                 $url[0] === "home" ||
                 $url[0] === "logout" ||
-                $url[0] === "profile" ||
-                $url[0] === "consulting-room" ||
-                $url[0] === "doctors"
+                $url[0] === "profile"
             ) {
-                include "modules/".$url[0]."/" . $url[0] . ".php";
+                include "modules/" . $url[0] . "/" . $url[0] . ".php";
+
+            } else if (
+                $url[0] === "consulting-rooms" ||
+                $url[0] === "create-consulting-room" ||
+                $url[0] === "edit-consulting-room"
+            ) {
+                // Consulting rooms
+                include "modules/consulting-rooms/" . $url[0] . ".php";
+
+            } else if (
+                $url[0] === "doctors" ||
+                $url[0] === "create-doctor" ||
+                $url[0] === "edit-doctor"
+            ) {
+                // Doctors
+                include "modules/doctors/" . $url[0] . ".php";
+            } else {
+                include "modules/404/404.php";
             }
         } else {
             include "modules/home/home.php";
@@ -111,6 +127,9 @@ session_start();
 
     <!-- Javascript propio -->
     <script src="<?php echo Template::path(); ?>views/js/main.js"></script>
+
+    <!-- Javascript de doctores -->
+    <script src="<?php echo Template::path(); ?>views/js/doctors.js"></script>
 
     <script>
         $(document).ready(function() {

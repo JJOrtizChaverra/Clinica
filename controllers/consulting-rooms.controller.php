@@ -7,16 +7,18 @@ class ConsultingRoomsController
     public function createConsultingRoom()
     {
 
-        if (isset($_POST["new-consulting"])) {
+        if (isset($_POST["name-consulting-room"])) {
 
             $data = array(
-                "name" => $_POST["new-consulting"]
+                "name" => $_POST["name-consulting-room"]
             );
 
             $result = ConsultingRoomsModel::createConsultingRoom($data);
 
             if ($result) {
-                echo "<script>window.location = '" . Template::path() . "consulting-room'</script>";
+                echo "<script>window.location = '" . Template::path() . "consulting-rooms'</script>";
+            } else {
+                echo "<script>alert('Error al registrar el consultorio')</script>";
             }
         }
     }
@@ -37,22 +39,19 @@ class ConsultingRoomsController
     {
         if (
             isset($_POST["name-consulting-room"]) &&
-            isset($_POST["id-consulting-room"])
+            isset($_GET["id"]) &&
+            isset($_GET["edit"])
         ) {
 
-            if (is_numeric($_POST["id-consulting-room"])) {
-                $data = array(
-                    "id" => (int) $_POST["id-consulting-room"],
-                    "name" => $_POST["name-consulting-room"]
-                );
+            $data = array(
+                "id" => (int) $_GET["id"],
+                "name" => $_POST["name-consulting-room"]
+            );
 
-                $result = ConsultingRoomsModel::editConsultingRoom($data);
+            $result = ConsultingRoomsModel::editConsultingRoom($data);
 
-                if ($result) {
-                    echo "<script>window.location = '" . Template::path() . "consulting-room'</script>";
-                } else {
-                    echo "<script>alert('Error al editar el consultorio')</script>";
-                }
+            if ($result) {
+                echo "<script>window.location = '" . Template::path() . "consulting-rooms'</script>";
             } else {
                 echo "<script>alert('Error al editar el consultorio')</script>";
             }
@@ -62,14 +61,19 @@ class ConsultingRoomsController
     // Eliminar consultorio
     public function deleteConsultingRoom()
     {
-        if (isset($_GET["id"]) && (isset($_GET["delete"]) && $_GET["delete"] == true)) {
+        if (isset($_GET["id"]) && isset($_GET["delete"])) {
 
-            $id = $_GET["id"];
+            if ($_GET["delete"] === "consulting-room") {
 
-            $result = ConsultingRoomsModel::deleteConsultingRoom($id);
+                $id = (int) $_GET["id"];
 
-            if ($result) {
-                echo "<script>window.location = '" . Template::path() . "consulting-room'</script>";
+                $result = ConsultingRoomsModel::deleteConsultingRoom($id);
+
+                if ($result) {
+                    echo "<script>window.location = '" . Template::path() . "consulting-rooms'</script>";
+                } else {
+                    echo "<script>alert('Error al eliminar el consultorio')</script>";
+                }
             } else {
                 echo "<script>alert('Error al eliminar el consultorio')</script>";
             }

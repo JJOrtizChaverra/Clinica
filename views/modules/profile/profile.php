@@ -11,7 +11,6 @@ if (
         echo "<script>window.location = '" . Template::path() . "home'</script>";
         return;
     }
-    
 } else {
     echo "<script>window.location = '" . Template::path() . "home'</script>";
     return;
@@ -47,7 +46,7 @@ if (
                     <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="document">Documento</label>
-                            <input type="text" class="form-control input-lg" id="document" value="<?php echo $_SESSION["username"]; ?>" readonly disabled required>
+                            <input type="text" class="form-control input-lg" id="document" value="<?php echo $_SESSION["document"]; ?>" readonly disabled required>
                         </div>
                         <div class="form-group">
                             <label for="name">Nombre</label>
@@ -126,7 +125,7 @@ if (
             <?php
 
             $changePassword = new UsersController();
-            $changePassword->changePassword();
+            $changePassword->changePassword($_SESSION["rol"]);
 
             ?>
         </div><!-- /.modal-content -->

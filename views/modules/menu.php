@@ -21,7 +21,7 @@
                 </li>
 
                 <li>
-                    <a href="<?php echo Template::path(); ?>consulting-room">
+                    <a href="<?php echo Template::path(); ?>consulting-rooms">
                         <i class="fa fa-medkit"></i>
                         <span>Consultorios</span>
                     </a>

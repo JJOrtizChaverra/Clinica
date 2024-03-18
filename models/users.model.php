@@ -5,13 +5,13 @@ require_once "connection.php";
 class UsersModel extends Connection
 {
 
-    static public function login($data)
+    static public function login($rol, $data)
     {
 
         try {
-            $pdo = Connection::connection()->prepare("SELECT * FROM users WHERE username_user = :username_user");
+            $pdo = Connection::connection()->prepare("SELECT * FROM $rol"."s"." WHERE document_$rol = :document_$rol");
 
-            $pdo->bindParam(":username_user", $data["username"], PDO::PARAM_STR);
+            $pdo->bindParam(":document_$rol", $data["document"], PDO::PARAM_INT);
 
             $pdo->execute();
 
@@ -23,11 +23,11 @@ class UsersModel extends Connection
         }
     }
 
-    static public function viewProfile($id) {
+    static public function viewProfile($rol, $id) {
         try {
-            $pdo = Connection::connection()->prepare("SELECT * FROM users WHERE id_user = :id_user");
+            $pdo = Connection::connection()->prepare("SELECT * FROM $rol"."s"." WHERE id_$rol = :id_$rol");
 
-            $pdo->bindParam(":id_user", $id, PDO::PARAM_INT);
+            $pdo->bindParam(":id_$rol", $id, PDO::PARAM_INT);
 
             $pdo->execute();
 
@@ -38,20 +38,20 @@ class UsersModel extends Connection
         }
     }
 
-    static public function editProfile($data) {
+    static public function editProfile($rol, $data) {
         try {
             
-            $pdo = Connection::connection()->prepare("UPDATE users SET
-            name_user = :name_user, 
-            lastname_user = :lastname_user,
-            picture_user = :picture_user
+            $pdo = Connection::connection()->prepare("UPDATE $rol"."s"." SET
+            name_$rol = :name_$rol, 
+            lastname_$rol = :lastname_$rol,
+            picture_$rol = :picture_$rol
             WHERE
-            id_user = :id_user");
+            id_$rol = :id_$rol");
 
-            $pdo->bindParam(":id_user", $data["id"], PDO::PARAM_INT);
-            $pdo->bindParam(":name_user", $data["name"], PDO::PARAM_STR);
-            $pdo->bindParam(":lastname_user", $data["lastname"], PDO::PARAM_STR);
-            $pdo->bindParam(":picture_user", $data["picture"], PDO::PARAM_STR);
+            $pdo->bindParam(":id_$rol", $data["id"], PDO::PARAM_INT);
+            $pdo->bindParam(":name_$rol", $data["name"], PDO::PARAM_STR);
+            $pdo->bindParam(":lastname_$rol", $data["lastname"], PDO::PARAM_STR);
+            $pdo->bindParam(":picture_$rol", $data["picture"], PDO::PARAM_STR);
 
             $pdo->execute();
 
@@ -64,16 +64,16 @@ class UsersModel extends Connection
         }
     }
 
-    static public function changePassword($data) {
+    static public function changePassword($rol, $data) {
         try {
             
-            $pdo = Connection::connection()->prepare("UPDATE users SET
-            password_user = :password_user
+            $pdo = Connection::connection()->prepare("UPDATE $rol"."s"." SET
+            password_$rol = :password_$rol
             WHERE
-            id_user = :id_user");
+            id_$rol = :id_$rol");
 
-            $pdo->bindParam(":id_user", $data["id"], PDO::PARAM_INT);
-            $pdo->bindParam(":password_user", $data["password"], PDO::PARAM_STR);
+            $pdo->bindParam(":id_$rol", $data["id"], PDO::PARAM_INT);
+            $pdo->bindParam(":password_$rol", $data["password"], PDO::PARAM_STR);
 
             $pdo->execute();
 

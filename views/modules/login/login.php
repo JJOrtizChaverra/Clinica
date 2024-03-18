@@ -9,7 +9,7 @@
 
         <form method="post" style="margin-bottom: 8px;">
             <div class="form-group has-feedback">
-                <input type="number" class="form-control" name="login-user" placeholder="Usuario" required>
+                <input type="number" class="form-control" name="login-document" placeholder="Documento" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 
             </div>

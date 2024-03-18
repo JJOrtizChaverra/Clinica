@@ -76,7 +76,6 @@ class ConsultingRoomsModel extends Connection
             $pdo = null;
 
             return true;
-
         } catch (Exception $e) {
             return $e->getMessage();
         }
