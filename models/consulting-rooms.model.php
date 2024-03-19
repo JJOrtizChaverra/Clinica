@@ -39,7 +39,11 @@ class ConsultingRoomsModel extends Connection
                 $pdo = Connection::connection()->prepare("SELECT * FROM consulting_rooms WHERE
                 $column = :$column");
 
-                $pdo->bindParam(":$column", $value, PDO::PARAM_STR);
+                if (is_numeric($value)) {
+                    $pdo->bindParam(":$column", $value, PDO::PARAM_INT);
+                } else {
+                    $pdo->bindParam(":$column", $value, PDO::PARAM_STR);
+                }
 
                 $pdo->execute();
 

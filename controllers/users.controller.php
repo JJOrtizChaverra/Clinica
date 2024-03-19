@@ -142,4 +142,10 @@ class UsersController
             }
         }
     }
+
+
+    static public function noRepeatUser($rol, $value)
+    {
+        return UsersModel::noRepeatUser($rol, $value);
+    }
 }

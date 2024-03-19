@@ -1,71 +1,69 @@
-<section class="content">
+<section class="container-xxl">
 
     <center>
-        <h1>Seleccione como desea ingresar al sistema</h1>
+        <h1 class="mt-2 mb-3">Seleccione como desea ingresar al sistema</h1>
     </center>
 
-    <!-- Small boxes (Stat box) -->
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-lg-3">
-            <!-- small box -->
-            <div class="small-box" style="background-color: #F781D8; color: white;">
-                <div class="inner">
-                    <h3>Secretarias</h3>
-
-                    <p>Iniciar sesion</p>
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
+            <div class="card" style="background-color: #F781D8;">
+                <div class="card-header text-center text-white">
+                    Iniciar Sesion
                 </div>
-                <div class="icon">
-                    <i class="fa fa-female"></i>
+                <div class="card-body text-end">
+                    <h2 class="card-title position-absolute text-white z-1">Secretaria</h2>
+                    <i class="bi bi-person-standing-dress opacity-50" style="font-size: 80px;"></i>
                 </div>
-                <a href="<?php echo Template::path(); ?>login&rol=secretary" class="small-box-footer">Ingresar <i class="fa fa-arrow-circle-right"></i></a>
+                <div class="card-footer text-body-secondary text-center" style="background-color: #e768c6;">
+                    <a href="<?php echo Template::path(); ?>login&rol=secretary" class="text-decoration-none fw-semibold text-white p-0">Ingresar</a>
+                </div>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-xs-12 col-sm-6 col-lg-3">
-            <!-- small box -->
-            <div class="small-box" style="background-color: #BDBDBD; color: white;">
-                <div class="inner">
-                    <h3>Doctores</h3>
 
-                    <p>Inicar sesion</p>
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
+            <div class="card" style="background-color: #BDBDBD;">
+                <div class="card-header text-center text-white">
+                    Iniciar Sesion
                 </div>
-                <div class="icon">
-                    <i class="fa fa-user-md"></i>
+                <div class="card-body text-end">
+                    <h2 class="card-title position-absolute text-white z-1">Doctor</h2>
+                    <i class="bi bi-person-workspace opacity-50" style="font-size: 80px;"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ingresar <i class="fa fa-arrow-circle-right"></i></a>
+                <div class="card-footer text-body-secondary text-center" style="background-color: #999999;">
+                    <a href="<?php echo Template::path(); ?>login&rol=doctor" class="text-decoration-none fw-semibold text-white p-0">Ingresar</a>
+                </div>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-xs-12 col-sm-6 col-lg-3">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>Paciente</h3>
 
-                    <p>Inicar sesion</p>
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
+            <div class="card" style="background-color: #f39c12;">
+                <div class="card-header  text-white text-center">
+                    Iniciar Sesion
                 </div>
-                <div class="icon">
-                    <i class="fa fa-users"></i>
+                <div class="card-body text-end">
+                    <h2 class="card-title position-absolute text-white z-1">Paciente</h2>
+                    <i class="bi bi-people-fill opacity-50" style="font-size: 80px;"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ingresar <i class="fa fa-arrow-circle-right"></i></a>
+                <div class="card-footer text-body-secondary text-center" style="background-color: #da8c10;">
+                    <a href="<?php echo Template::path(); ?>login&rol=patient" class="text-decoration-none fw-semibold text-white p-0">Ingresar</a>
+                </div>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-xs-12 col-sm-6 col-lg-3">
-            <!-- small box -->
-            <div class="small-box bg-red">
-                <div class="inner">
-                    <h3>Administrador</h3>
 
-                    <p>Iniciar sesion</p>
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
+            <div class="card" style="background-color: #dd4b39;">
+                <div class="card-header text-white text-center">
+                    Iniciar Sesion
                 </div>
-                <div class="icon">
-                    <i class="fa fa-male"></i>
+                <div class="card-body text-end">
+                    <h2 class="card-title position-absolute text-white z-1">Administrador</h2>
+                    <i class="bi bi-person-badge-fill opacity-50" style="font-size: 80px;"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ingresar <i class="fa fa-arrow-circle-right"></i></a>
+                <div class="card-footer text-body-secondary text-center" style="background-color: #c74333;">
+                    <a href="<?php echo Template::path(); ?>login&rol=admin" class="text-decoration-none fw-semibold text-white p-0">Ingresar</a>
+                </div>
             </div>
         </div>
-        <!-- ./col -->
     </div>
 
 </section>

@@ -11,5 +11,8 @@ require_once "models/consulting-rooms.model.php";
 require_once "controllers/doctors.controller.php";
 require_once "models/doctors.model.php";
 
+require_once "controllers/patients.controller.php";
+require_once "models/patients.model.php";
+
 $template = new Template();
 $template -> callTemplate();

@@ -16,6 +16,32 @@ const showPicture = function (event) {
 }
 
 
+// Funcion para evitar repetir el numero de documento
+const noRepeatUser = function (input, rol) {
+
+    const data = new FormData();
+    data.append("rol", rol);
+    data.append("value", input.value);
+
+    $.ajax({
+        url: "ajax/users.ajax.php",
+        method: "POST",
+        data: data,
+        dataType: "json",
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        success: function (result) {
+
+            if (result !== false) {
+
+            }
+        }
+    });
+
+}
+
 // Funcion para abrir la imagen en otra pestaña
 const openImage = function (image) {
     window.open(image.src);

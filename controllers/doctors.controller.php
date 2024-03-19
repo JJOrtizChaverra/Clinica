@@ -61,20 +61,7 @@ class DoctorsController
             isset($_GET["id"]) &&
             isset($_GET["edit"])
         ) {
-
-            // $pathImage = $_POST["current-picture-doctor"];
-
-            // $tmpName = $_FILES["picture-doctor"]["tmp_name"];
-            // $typeImage = $_FILES["picture-doctor"]["type"];
-            // $nameImage = $_POST["document-doctor"];
-            // $currentImage = $_POST["current-picture-doctor"];
-            // $rol = "doctor";
-
-            // if (isset($tmpName) && !empty($tmpName)) {
-            //     $deleteImage = Template::deleteImage($currentImage, $rol);
-            //     $pathImage = Template::createImage($tmpName, $typeImage, $nameImage, $rol);
-            // }
-
+            
             $data = array(
                 "id" => (int) $_GET["id"],
                 "document" => (int) $_POST["document-doctor"],

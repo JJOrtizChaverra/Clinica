@@ -50,7 +50,11 @@ class DoctorsModel extends Connection
                 $pdo = Connection::connection()->prepare("SELECT * FROM doctors WHERE
                 $column = :$column");
 
-                $pdo->bindParam(":$column", $value, PDO::PARAM_STR);
+                if (is_numeric($value)) {
+                    $pdo->bindParam(":$column", $value, PDO::PARAM_INT);
+                } else {
+                    $pdo->bindParam(":$column", $value, PDO::PARAM_STR);
+                }
 
                 $pdo->execute();
 
@@ -96,7 +100,7 @@ class DoctorsModel extends Connection
 
             return true;
         } catch (Exception $e) {
-            return $e->getMessage();
+            return false;
         }
     }
 

@@ -1,0 +1,44 @@
+:root {
+    --color-primary: #367FA9;
+    --color-primary-2: rgb(36, 100, 138);
+    --color-secondary: #222D32;
+    --color-third: #B8C7CE;
+    --color-success: #03A65A;
+    --color-danger: #D9483B;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    /* background-color: #ECF0F5; */
+    background-color: #d2d6de;
+    height: 100%;
+}
+
+.background-primary {
+    background-color: var(--color-primary);
+}
+
+.background-primary:hover {
+    background-color: var(--color-primary-2);
+}
+
+.background-secondary {
+    background-color: var(--color-secondary);
+}
+
+.background-success {
+    background-color: var(--color-success);
+}
+
+.background-danger {
+    background-color: var(--color-danger);
+}
+
+.dropdown-menu {
+    position: absolute;
+    left: initial !important;
+    right: 0;
+}

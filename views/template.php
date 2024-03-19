@@ -14,20 +14,30 @@ session_start();
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/font-awesome/css/font-awesome.min.css"> -->
     <!-- Ionicons -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/Ionicons/css/ionicons.min.css"> -->
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/AdminLTE.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/AdminLTE.min.css"> -->
     <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/skins/_all-skins.min.css">
+    folder instead of downloading all of them to reduce the load. -->
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/skins/_all-skins.min.css"> -->
+
+    <!-- Bootstrap 5.3.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Icons Bootstrap 5.3.3 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Data table -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.css"> -->
+    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+
+    <!-- Mi css -->
+    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/css/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +50,7 @@ session_start();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini login-page">
+<body>
 
     <!-- Site wrapper -->
 
@@ -54,7 +64,7 @@ session_start();
         include "modules/header.php";
 
         // Left side column. contains the sidebar
-        include "modules/menu.php";
+        // include "modules/menu.php";
 
 
         $url = array();
@@ -71,7 +81,6 @@ session_start();
                 $url[0] === "profile"
             ) {
                 include "modules/" . $url[0] . "/" . $url[0] . ".php";
-
             } else if (
                 $url[0] === "consulting-rooms" ||
                 $url[0] === "create-consulting-room" ||
@@ -79,7 +88,6 @@ session_start();
             ) {
                 // Consultorios
                 include "modules/consulting-rooms/" . $url[0] . ".php";
-
             } else if (
                 $url[0] === "doctors" ||
                 $url[0] === "create-doctor" ||
@@ -87,7 +95,6 @@ session_start();
             ) {
                 // Doctores
                 include "modules/doctors/" . $url[0] . ".php";
-
             } else if (
                 $url[0] === "patients" ||
                 $url[0] === "create-patient" ||
@@ -95,7 +102,6 @@ session_start();
             ) {
                 // Pacientes
                 include "modules/patients/" . $url[0] . ".php";
-
             } else {
                 include "modules/404/404.php";
             }
@@ -127,25 +133,34 @@ session_start();
     <script src="<?php echo Template::path(); ?>views/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+
+    <!-- Bootstrap 5.3.3 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- SlimScroll -->
-    <script src="<?php echo Template::path(); ?>views/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script> -->
     <!-- FastClick -->
-    <script src="<?php echo Template::path(); ?>views/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/fastclick/lib/fastclick.js"></script> -->
     <!-- AdminLTE App -->
-    <script src="<?php echo Template::path(); ?>views/dist/js/adminlte.min.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/dist/js/adminlte.min.js"></script> -->
     <!-- AdminLTE for demo purposes -->
-    <script src="<?php echo Template::path(); ?>views/dist/js/demo.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/dist/js/demo.js"></script> -->
 
     <!-- Data table -->
-    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.js"></script>
     <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
 
+    
     <!-- Javascript propio -->
     <script src="<?php echo Template::path(); ?>views/js/main.js"></script>
+
+    <!-- Javascript para validar formularios -->
+    <!-- <script src="./js/form-validation.js"></script> -->
+
+
 
     <script>
         $(document).ready(function() {
