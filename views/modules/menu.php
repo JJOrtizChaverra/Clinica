@@ -1,43 +1,93 @@
-<aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+<?php
 
-        <?php if (isset($_SESSION["rol"]) && $_SESSION["rol"] === "secretary") : ?>
+$url = $_GET["url"];
 
-            <ul class="sidebar-menu">
+?>
 
-                <li>
-                    <a href="<?php echo Template::path(); ?>home">
-                        <i class="fa fa-home"></i>
-                        <span>Inicio</span>
+<div class="offcanvas offcanvas-start background-secondary" tabindex="-1" id="menuNavbar" aria-labelledby="menuNavbarLabel">
+    <div class="offcanvas-header background-primary">
+        <h5 class="offcanvas-title text-white" id="menuNavbarLabel">Clinica Medica</h5>
+        <button type="button" class="btn-close bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+            <li class="nav-item">
+
+                <?php if ($url === "home") : ?>
+
+                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>home">
+                        <i class="bi bi-house me-2 fs-5"></i>
+                        Inicio
                     </a>
-                </li>
 
-                <li>
-                    <a href="<?php echo Template::path(); ?>doctors">
-                        <i class="fa fa-user-md"></i>
-                        <span>Doctores</span>
+                <?php else : ?>
+
+                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>home">
+                        <i class="bi bi-house me-2 fs-5"></i>
+                        Inicio
                     </a>
-                </li>
+                <?php endif; ?>
+            </li>
 
-                <li>
-                    <a href="<?php echo Template::path(); ?>consulting-rooms">
-                        <i class="fa fa-medkit"></i>
-                        <span>Consultorios</span>
+            <li class="nav-item">
+
+                <?php if ($url === "doctors") : ?>
+
+                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>doctors">
+                        <i class="bi bi-person-workspace me-2 fs-5"></i>
+                        Doctores
                     </a>
-                </li>
 
-                <li>
-                    <a href="<?php echo Template::path(); ?>patients">
-                        <i class="fa fa-users"></i>
-                        <span>Pacientes</span>
+                <?php else : ?>
+
+                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>doctors">
+                        <i class="bi bi-person-workspace me-2 fs-5"></i>
+                        Doctores
                     </a>
-                </li>
 
-            </ul>
+                <?php endif; ?>
 
-        <?php endif; ?>
+            </li>
 
-    </section>
-    <!-- /.sidebar -->
-</aside>
+            <li class="nav-item">
+
+                <?php if ($url === "consulting-rooms") : ?>
+
+                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>consulting-rooms">
+                        <i class="bi bi-bandaid me-2 fs-5"></i>
+                        Consultorios
+                    </a>
+
+                <?php else : ?>
+
+                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>consulting-rooms">
+                        <i class="bi bi-bandaid me-2 fs-5"></i>
+                        Consultorios
+                    </a>
+
+                <?php endif; ?>
+            </li>
+
+            <li class="nav-item">
+
+                <?php if ($url === "patients") : ?>
+
+                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>patients">
+                        <i class="bi bi-people me-2 fs-5"></i>
+                        Pacientes
+                    </a>
+
+                <?php else : ?>
+
+                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>patients">
+                        <i class="bi bi-people me-2 fs-5"></i>
+                        Pacientes
+                    </a>
+
+                <?php endif; ?>
+            </li>
+
+        </ul>
+    </div>
+</div>

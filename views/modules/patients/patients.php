@@ -1,107 +1,248 @@
 <?php
 
-if ($_SESSION["rol"] === "secretary") {
+if (isset($_SESSION["rol"]) && $_SESSION["rol"] === "secretary") {
 
-    // Trayendo los pacientes
-    $patients = PatientsController::viewPatients(null, null);
+    $table1 = "patients";
+    $table2 = null;
+    $column = "id";
+    $value = null;
+    $select = "id_patient,document_patient,name_patient,lastname_patient,gender_patient,picture_patient";
+
+    $patients = Controller::get($table1, $table2, $column, $value, $select);
 } else {
-    echo "<script>window.location = '" . Template::path() . "home'</script>";
+    echo "<script>window.location = '" . TemplateController::path() . "home'</script>";
     return;
 }
 
 ?>
 
-<div class="container-fluid">
 
-    <section class="d-flex align-items-center justify-content-between p-2">
-        <h1 class="fs-2">Gestor de pacientes</h1>
+<div class="container-xl">
 
-        <nav class="d-flex align-items-center" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo Template::path() ?>home">Home</a></li>
+    <section class="d-flex align-items-center justify-content-between p-3">
+        <h1 class="fs-2">Gestor de Pacientes</h1>
+
+        <nav class="d-none d-sm-flex align-items-center" aria-label="breadcrumb">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="<?php echo TemplateController::path() ?>home" class="breadcrumb-item">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Pacientes</li>
             </ol>
         </nav>
     </section>
 
-    <section class="p-3 border bg-white d-flex flex-column gap-3">
+    <section class="p-3 border bg-white d-flex flex-column gap-3 rounded-3">
 
-        <div class="box-header">
-
-            <a href="<?php Template::path() ?>create-patient" class="btn btn-primary btn-lg">Registrar un Paciente</a>
-
+        <div class="header">
+            <button type="button" class="btn background-primary btn-lg text-white fw-medium" data-bs-toggle="modal" data-bs-target="#modal-register-patients">Registrar un Paciente</button>
         </div>
 
-        <div class="box-body">
 
-            <table class="table table-bordered table-hover table-striped data-table">
+        <div class="body">
 
-                <thead>
+            <div class="table-responsive">
 
-                    <tr>
+                <table class="table table-striped rounded-1 data-table" id="table-patients">
 
-                        <th>N°</th>
-                        <th>Documento</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Genero</th>
-                        <th>Foto</th>
-                        <th>Editar / Borrar</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <?php foreach ($patients as $key => $patient) : ?>
-
+                    <thead>
                         <tr>
-
-                            <td><?php echo ($key + 1); ?></td>
-                            <td><?php echo $patient["document_patient"]; ?></td>
-                            <td><?php echo $patient["name_patient"]; ?></td>
-                            <td><?php echo $patient["lastname_patient"]; ?></td>
-                            <td><?php echo $patient["gender_patient"]; ?></td>
-
-                            <?php if ($patient["picture_patient"] !== null) : ?>
-
-                                <td><img style="cursor: pointer;" src="<?php echo Template::path(); ?>views/assets/img/<?php echo $patient["rol_patient"]; ?>/<?php echo $patient["picture_patient"]; ?>" class="img-responsive img-circle" alt="<?php echo $patient["name_patient"] . " " . $patient["lastname_patient"]; ?>" width="30" onclick="openImage(this)"></td>
-
-                            <?php else : ?>
-
-                                <td><img src="<?php echo Template::path(); ?>views/assets/img/default.jpg" class="img-responsive img-circle" alt="<?php echo $patient["name_patient"] . " " . $patient["lastname_patient"]; ?>" width="30"></td>
-
-                            <?php endif ?>
-
-                            <td>
-
-                                <a href="<?php echo Template::path(); ?>edit-patient&id=<?php echo $patient["id_patient"] ?>&edit=patient" class="btn btn-success" style="margin-right: 8px;">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-
-                                <a href="<?php echo Template::path(); ?>patients&id=<?php echo $patient["id_patient"]; ?>&current-picture=<?php echo explode(".", $patient["picture_patient"])[0]; ?>&delete=patient" class="btn btn-danger">
-                                    <i class="fa fa-times"></i>
-
-                                    <?php
-
-                                    $deletePatient = new PatientsController();
-                                    $deletePatient->deletePatient();
-
-                                    ?>
-                                </a>
-
-                            </td>
-
+                            <th>N°</th>
+                            <th>Documento</th>
+                            <th>Nombre/s</th>
+                            <th>Apellido/s</th>
+                            <th>Genero</th>
+                            <th>Foto</th>
+                            <th>Acciones</th>
                         </tr>
+                    </thead>
 
-                    <?php endforeach; ?>
+                    <tbody>
 
-                </tbody>
+                        <?php foreach ($patients as $key => $patient) : ?>
 
-            </table>
+                            <tr id=<?php echo $patient["id_patient"]; ?>>
 
+                                <td><?php echo $key + 1; ?></td>
+                                <td><?php echo $patient["document_patient"]; ?></td>
+                                <td><?php echo $patient["name_patient"]; ?></td>
+                                <td><?php echo $patient["lastname_patient"]; ?></td>
+                                <td><?php echo $patient["gender_patient"]; ?></td>
+
+                                <?php if ($patient["picture_patient"] !== null) : ?>
+                                    <td><img src="<?php TemplateController::path(); ?>views/assets/img/patient/<?php echo $patient["picture_patient"]; ?>" alt="<?php echo $patient["name_patient"] . " " . $patient["lastname_patient"]; ?>" class="img-fluid rounded-circle" width="50px"></td>
+                                <?php else : ?>
+                                    <td><img src="<?php TemplateController::path(); ?>views/assets/img/default.jpg" alt="<?php echo $patient["name_patient"] . " " . $patient["lastname_patient"]; ?>" class="img-fluid rounded-circle" width="50px"></td>
+                                <?php endif; ?>
+
+                                <td>
+                                    <button class="btn btn-success mb-2 my-tooltip button-edit-patient" data-bs-toggle="modal" data-bs-target="#modal-edit-patients">
+                                        <span class="tooltip-text">
+                                            Editar
+                                        </span>
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+
+                                    <button class="btn btn-danger mb-2 my-tooltip button-delete-patient" data-bs-toggle="modal" data-bs-target="#modal-delete-patients">
+                                        <span class="tooltip-text">
+                                            Eliminar
+                                        </span>
+                                        <i class="bi bi-x-square"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
         </div>
     </section>
+</div>
 
+<!-- Modal para registrar paciente -->
+<div class="modal fade" id="modal-register-patients" tabindex="-1" aria-labelledby="modal-register-patientsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-register-patientsLabel">Registrar Paciente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="alert text-center m-2" role="alert" id="alert-register-patient"></div>
+
+            <form class="g-3 needs-validation d-flex flex-column justify-content-evenly" id="form-register-patient" novalidate>
+
+                <div class="modal-body">
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="document-register" class="form-label fw-semibold">Documento</label>
+                        <input type="number" class="form-control form-control-lg" id="document-register" name="document" placeholder="Numero de Documento del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="name-register" class="form-label fw-semibold">Nombre/s</label>
+                        <input type="text" class="form-control form-control-lg" id="name-register" name="name" placeholder="Nombre/s del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="lastname-register" class="form-label fw-semibold">Apellido/s</label>
+                        <input type="text" class="form-control form-control-lg" id="lastname-register" name="lastname" placeholder="Apellido/s del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="gender-register" class="form-label fw-semibold">Genero</label>
+
+                        <select class="form-select form-select-lg" id="gender-register" name="gender" aria-label="Large select example" required>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+
+                        <div class="invalid-feedback">Debes seleccionar un genero</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="password-register" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" class="form-control form-control-lg" id="password-register" name="password" placeholder="Crea una contraseña para el paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn background-primary text-white">Aceptar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para editar paciente -->
+<div class="modal fade" id="modal-edit-patients" tabindex="-1" aria-labelledby="modal-edit-patientsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-edit-patientsLabel">Editar Paciente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="alert text-center m-2" role="alert" id="alert-edit-patient"></div>
+
+            <form class="g-3 needs-validation d-flex flex-column justify-content-evenly" id="form-edit-patient" novalidate>
+
+                <div class="modal-body">
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="name-edit" class="form-label fw-semibold">Nombre/s</label>
+                        <input type="text" class="form-control form-control-lg" id="name-edit" name="name" placeholder="Nombre/s del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="lastname-edit" class="form-label fw-semibold">Apellido/s</label>
+                        <input type="text" class="form-control form-control-lg" id="lastname-edit" name="lastname" placeholder="Apellido/s del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="gender-edit" class="form-label fw-semibold">Genero</label>
+
+                        <select class="form-select form-select-lg" id="gender" name="gender" aria-label="Large select example" required>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+
+                        <div class="invalid-feedback">Debes seleccionar un genero</div>
+                    </div>
+
+                    <div class="mb-3 has-validation col-12">
+                        <label for="password-edit" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" class="form-control form-control-lg" id="password-edit" name="password" placeholder="Cambiar la contraseña del paciente" required>
+
+                        <div class="invalid-feedback">El campo no puede estar vacío</div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn background-primary text-white" id="button-confirm-edit">Guardar cambios</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para eliminar paciente -->
+<div class="modal modal-sm fade" id="modal-delete-patients" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal-delete-patientsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-delete-patientsLabel">Eliminar Paciente</h1>
+            </div>
+
+            <div class="alert text-center m-2" role="alert" id="alert-delete-patient"></div>
+
+            <div class="modal-body text-center">
+                ¿Esta seguro/a que desea eliminar a este paciente?
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn background-danger text-white" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn background-primary text-white" id="button-confirm-delete">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>

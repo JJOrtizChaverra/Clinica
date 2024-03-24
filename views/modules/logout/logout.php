@@ -2,4 +2,4 @@
 
 session_destroy();
 
-echo "<script>window.location = '".Template::path()."dashboard'</script>";
+echo "<script>window.location = '".TemplateController::path()."dashboard'</script>";

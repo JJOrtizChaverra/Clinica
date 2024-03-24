@@ -5,6 +5,9 @@
     --color-third: #B8C7CE;
     --color-success: #03A65A;
     --color-danger: #D9483B;
+    --color-danger-2: #b4362a;
+    --color-invalid: #dc3545;
+    --color-valid: #198754;
 }
 
 html {
@@ -21,8 +24,12 @@ body {
     background-color: var(--color-primary);
 }
 
-.background-primary:hover {
+.btn.background-primary:hover {
     background-color: var(--color-primary-2);
+}
+
+.btn.background-primary:active {
+    background-color: var(--color-primary) !important;
 }
 
 .background-secondary {
@@ -37,8 +44,168 @@ body {
     background-color: var(--color-danger);
 }
 
+.background-danger:hover {
+    background-color: var(--color-danger-2);
+}
+
+.background-danger:active {
+    background-color: var(--color-danger) !important;
+}
+
+.card-dashboard-secretary {
+    background-color: #eb73cb;
+}
+
+.card-dashboard-secretary:hover {
+    background-color: #d667b8;
+}
+
+.card-dashboard-doctor {
+    background-color: #acacac;
+}
+
+.card-dashboard-doctor:hover {
+    background-color: #919191;
+}
+
+.card-dashboard-patient {
+    background-color: #f39c12;
+}
+
+.card-dashboard-patient:hover {
+    background-color: #ce8715;
+}
+
+.card-dashboard-admin {
+    background-color: #dd4b39;
+}
+
+.card-dashboard-admin:hover {
+    background-color: #be3b2a;
+}
+
+.menu-profile:active {
+    border-color: transparent !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.menu-profile p:hover {
+    color: rgb(211, 211, 211) !important;
+}
+
+.card-body-profile {
+    width: 80px;
+    gap: 12px;
+    align-items: center;
+}
+
 .dropdown-menu {
     position: absolute;
     left: initial !important;
     right: 0;
 }
+
+.breadcrumb-item {
+    text-decoration: none;
+}
+
+.alert {
+    display: none;
+}
+
+table {
+    width: 100% !important;
+}
+
+th,
+td {
+    text-align: start !important;
+    vertical-align: middle !important;
+}
+
+.dt-paging-button {
+    font-weight: bold !important;
+    border-radius: 0.5rem !important;
+}
+
+/* Elemento loading */
+#loading {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#loading div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.disable-interaction {
+    pointer-events: none;
+}
+
+
+/* Tooltip */
+
+.my-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.my-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--color-secondary);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.my-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/*// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .card-body-profile {
+        width: 200px;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {}

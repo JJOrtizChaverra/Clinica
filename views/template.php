@@ -5,52 +5,39 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Clinica Medica</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
 
-    <!-- Font Awesome -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/font-awesome/css/font-awesome.min.css"> -->
-    <!-- Ionicons -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/Ionicons/css/ionicons.min.css"> -->
-    <!-- Theme style -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/AdminLTE.min.css"> -->
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-    folder instead of downloading all of them to reduce the load. -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/dist/css/skins/_all-skins.min.css"> -->
-
-    <!-- Bootstrap 5.3.3 -->
+    <!-- CSS Bootstrap 5.3.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- Icons Bootstrap 5.3.3 -->
+    <!-- Iconos Bootstrap 5.3.3 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Data table -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.css"> -->
-    <!-- <link rel="stylesheet" href="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+    <!-- CSS Bootstrap DataTable 2.0.3 -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css" />
 
-    <!-- Mi css -->
-    <link rel="stylesheet" href="<?php echo Template::path(); ?>views/css/style.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- CSS Propio -->
+    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/css/style.css">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body>
+<body class="disable-interaction">
+
+    <!-- Loading -->
+    <div id="loading" class="disable-interaction">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
 
     <!-- Site wrapper -->
 
@@ -71,37 +58,19 @@ session_start();
 
         // Validamos si viene una variable get url
         if (isset($_GET["url"])) {
+
             // Dividimos el contenido de la variable get
-            $url = explode("/", $_GET["url"]);
+            $url = explode("/", $_GET["url"])[0];
 
             // Preguntamos si en el indice 0 esta el dashboard
             if (
-                $url[0] === "home" ||
-                $url[0] === "logout" ||
-                $url[0] === "profile"
+                $url === "home" ||
+                $url === "logout" ||
+                $url === "profile"
             ) {
-                include "modules/" . $url[0] . "/" . $url[0] . ".php";
-            } else if (
-                $url[0] === "consulting-rooms" ||
-                $url[0] === "create-consulting-room" ||
-                $url[0] === "edit-consulting-room"
-            ) {
-                // Consultorios
-                include "modules/consulting-rooms/" . $url[0] . ".php";
-            } else if (
-                $url[0] === "doctors" ||
-                $url[0] === "create-doctor" ||
-                $url[0] === "edit-doctor"
-            ) {
-                // Doctores
-                include "modules/doctors/" . $url[0] . ".php";
-            } else if (
-                $url[0] === "patients" ||
-                $url[0] === "create-patient" ||
-                $url[0] === "edit-patient"
-            ) {
-                // Pacientes
-                include "modules/patients/" . $url[0] . ".php";
+                include "modules/$url/$url.php";
+            } else if($url === "consulting-rooms" || $url === "doctors" || $url === "patients") {
+                include "managers/manager.php";
             } else {
                 include "modules/404/404.php";
             }
@@ -116,57 +85,31 @@ session_start();
 
             if ($_GET["url"] === "login") {
                 include "modules/login/login.php";
-
-                return;
+            } else {
+                include "modules/dashboard.php";
             }
-
-            include "modules/dashboard.php";
         } else {
             include "modules/dashboard.php";
         }
     }
 
-
     ?>
 
-    <!-- jQuery 3 -->
-    <script src="<?php echo Template::path(); ?>views/bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap 3.3.7 -->
-    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
-
-    <!-- Bootstrap 5.3.3 -->
+    <!-- JS Bootstrap 5.3.3 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <!-- SlimScroll -->
-    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script> -->
-    <!-- FastClick -->
-    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/fastclick/lib/fastclick.js"></script> -->
-    <!-- AdminLTE App -->
-    <!-- <script src="<?php echo Template::path(); ?>views/dist/js/adminlte.min.js"></script> -->
-    <!-- AdminLTE for demo purposes -->
-    <!-- <script src="<?php echo Template::path(); ?>views/dist/js/demo.js"></script> -->
+    <!-- JQuery DataTable 3.7.1 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" type="text/Javascript"></script>
+    <!-- JS DataTable 2.0.3 -->
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" type="text/Javascript"></script>
+    <!-- JS Bootstrap DataTable 2.0.3 -->
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js" type="text/Javascript"></script>
 
-    <!-- Data table -->
-    <!-- <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <script src="<?php echo Template::path(); ?>views/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script> -->
+    <!-- JS propio -->
+    <script src="<?php echo TemplateController::path(); ?>views/js/main.mjs" type="module"></script>
 
-    
-    <!-- Javascript propio -->
-    <script src="<?php echo Template::path(); ?>views/js/main.js"></script>
-
-    <!-- Javascript para validar formularios -->
-    <!-- <script src="./js/form-validation.js"></script> -->
-
-
-
-    <script>
-        $(document).ready(function() {
-            $('.sidebar-menu').tree()
-        })
-    </script>
+    <!-- JS para validar formularios -->
+    <script src="<?php echo TemplateController::path(); ?>views/js/form-validation.js"></script>
 </body>
 
 </html>
