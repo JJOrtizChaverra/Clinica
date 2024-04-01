@@ -15,24 +15,19 @@ session_start();
     <title>Clinica Medica</title>
 
     <!-- CSS Bootstrap 5.3.3 -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/dist/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/dist/bootstrap/css/bootstrap.min.css" type="text/css">
 
     <!-- Iconos Bootstrap 5.3.3 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
 
-    <!-- CSS Bootstrap DataTable 2.0.3 -->
-    <!-- <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css" /> -->
-    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/dist/datatables/css/datatables.min.css">
+    <!-- CSS DataTable 2.0.3 -->
+    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/dist/datatables/css/datatables.min.css" type="text/css">
 
     <!-- CSS Propio -->
-    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/css/style.css">
+    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/css/style.css" type="text/css">
 
     <!-- CSS para el modo oscuro -->
-    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/css/dark-mode.css">
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="<?php echo TemplateController::path(); ?>views/css/dark-mode.css" type="text/css">
 
     <!-- Script unico y necesario para funcionar el dark mode -->
     <script>
@@ -55,8 +50,6 @@ session_start();
         </div>
     </div>
 
-    <!-- Site wrapper -->
-
     <?php
 
     if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
@@ -70,9 +63,9 @@ session_start();
             // Dividimos el contenido de la variable get
             $url = explode("/", $_GET["url"])[0];
 
-            if ($url === "home") {
-                include "pages/$url/$url.php";
-            } else if (
+            // Validamos cada url para mostrar o incluir su respectiva pagina
+            if (
+                $url === "home" ||
                 $url === "consulting-rooms" ||
                 $url === "doctors" ||
                 $url === "patients" ||
@@ -110,31 +103,19 @@ session_start();
     ?>
 
     <!-- JS Bootstrap 5.3.3 -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-    <script src="<?php TemplateController::path(); ?>views/dist/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php TemplateController::path(); ?>views/dist/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
-    <!-- JQuery DataTable 3.7.1 -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js" type="text/Javascript"></script> -->
-    <!-- JS DataTable 2.0.3 -->
-    <!-- <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js" type="text/Javascript"></script> -->
     <!-- JS Bootstrap DataTable 2.0.3 -->
-    <!-- <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js" type="text/Javascript"></script> -->
-    <script src="<?php TemplateController::path(); ?>views/dist/datatables/js/datatables.min.js"></script>
+    <script src="<?php TemplateController::path(); ?>views/dist/datatables/js/datatables.min.js" type="text/javascript"></script>
 
-    <!-- JS Full calendar -->
-    <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script> -->
-    <script src="<?php echo TemplateController::path(); ?>views/dist/fullcalendar/js/index.global.min.js"></script>
-    <script src="<?php echo TemplateController::path(); ?>views/js/plugins/full-calendar.mjs" type="module"></script>
+    <!-- JS Full calendar 6.1 -->
+    <script src="<?php echo TemplateController::path(); ?>views/dist/fullcalendar/js/index.global.min.js" type="text/javascript"></script>
 
     <!-- JS Sweet Alert 2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?php TemplateController::path(); ?>views/js/plugins/sweet-alert.mjs" type="module"></script>
 
     <!-- JS propio -->
     <script src="<?php echo TemplateController::path(); ?>views/js/main.mjs" type="module"></script>
-
-    <!-- JS para validar formularios -->
-    <script src="<?php echo TemplateController::path(); ?>views/js/form-validation.js"></script>
 </body>
 
 </html>

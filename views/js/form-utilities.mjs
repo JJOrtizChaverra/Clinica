@@ -1,4 +1,6 @@
-const formValidation = (function () {
+// ---------- Funcion para validar los formularios y sus campos -----------
+
+export const formValidation = function () {
 
     const forms = document.querySelectorAll(".needs-validation");
 
@@ -84,4 +86,4 @@ const formValidation = (function () {
         });
 
     });
-})();
+}

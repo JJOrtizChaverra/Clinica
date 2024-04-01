@@ -2,7 +2,7 @@ import { makeRequest } from "../request.mjs";
 import { getTimesHorary } from "../horarys.mjs";
 import { sweetAlert } from "./sweet-alert.mjs";
 
-document.addEventListener("DOMContentLoaded", function () {
+export const fullCalendar = function () {
 
     const calendarEl = document.getElementById("full-calendar");
 
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         calendar.render();
     }
-});
+}

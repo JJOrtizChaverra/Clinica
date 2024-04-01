@@ -1,3 +1,4 @@
+import { formValidation } from "./form-utilities.mjs";
 import { login, editProfile, changePassword } from "./users.mjs";
 import { insertConsultingRoom, updateConsultingRoom, deleteConsultingRoom } from "./consulting-rooms.mjs";
 import { insertDoctor, updateDoctor, deleteDoctor } from "./doctors.mjs";
@@ -7,10 +8,13 @@ import { insertHorary } from "./horarys.mjs";
 import { askQuote } from "./quotes.mjs";
 import { openImage, showPicture } from "./user-actions.mjs";
 import { darkMode } from "./configurations.mjs";
+import { fullCalendar } from "./plugins/full-calendar.mjs";
 import { dataTable } from "./plugins/data-table.mjs";
 import { hideLoad } from "./loading.mjs";
 
 window.addEventListener("load", function () {
+
+    formValidation();
 
     if (this.document.getElementById("view-login")) {
         login();
@@ -39,6 +43,7 @@ window.addEventListener("load", function () {
         insertHorary();
 
     } else if (this.document.getElementById("view-quotes-patients")) {
+        fullCalendar();
         askQuote();
 
     } else if (this.document.getElementById("view-profile")) {
