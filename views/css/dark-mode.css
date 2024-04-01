@@ -1,0 +1,86 @@
+:root[data-theme="light"] {
+    --theme: #fff;
+    --bg-color: #d2d6de;
+    --bg-containers: #fff;
+    --text-color: #000;
+    --bg-pagination: #e9ecef;
+    --text-color-pagination: rgba(33, 37, 41, 0.75);
+    --text-color-placeholder: #8c8e8f;
+    --text-color-inputs: #212529;
+    --bg-color-sweet-alert: #ffffff;
+    --text-color-sweet-alert: #545454;
+    --text-color-breadcrumb: #4d4d4d;
+    --bg-color-switch: #dfdfdf;
+    --bg-cell-current-day-calendar: rgb(255 220 40 / 45%);
+    --bg-color-inputs-checkbox: #0d6efd;
+}
+
+:root[data-theme="dark"] {
+    --theme: #161616;
+    --bg-color: #232323;
+    --bg-containers: #212529;
+    --text-color: #fff;
+    --bg-pagination: #343b43;
+    --text-color-pagination: #fff;
+    --text-color-placeholder: #999999;
+    --text-color-inputs: #e9e9e9;
+    --bg-color-sweet-alert: #51565b;
+    --text-color-sweet-alert: #ffffff;
+    --text-color-breadcrumb: #c7c7c7;
+    --bg-color-switch: #367FA9;
+    --bg-cell-current-day-calendar: rgb(255 220 40 / 0.15);
+    --bg-color-inputs-checkbox: #0d6efd;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.section-content {
+    background-color: var(--bg-containers) !important;
+}
+
+td,
+th {
+    color: var(--text-color) !important;
+}
+
+.page-link:not(.page-link[aria-current="page"]) {
+    background-color: var(--bg-pagination) !important;
+    color: var(--text-color-pagination) !important;
+}
+
+.breadcrumb-item[aria-current="page"] {
+    color: var(--text-color-breadcrumb);
+}
+
+.modal-content {
+    background-color: var(--bg-containers) !important;
+}
+
+input:not(input[type="submit"]), select {
+    background-color: var(--theme) !important;
+    color: var(--text-color-inputs) !important;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--bg-color-inputs-checkbox) !important;
+}
+
+#switch-dark-mode {
+    background-color: var(--bg-color-switch) !important;
+}
+
+input::placeholder {
+    color: var(--text-color-placeholder) !important;
+}
+
+.swal2-popup {
+    background-color: var(--bg-color-sweet-alert);
+    color: var(--text-color-sweet-alert);
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: var(--bg-cell-current-day-calendar);
+}

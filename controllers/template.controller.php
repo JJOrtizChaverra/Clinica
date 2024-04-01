@@ -9,6 +9,6 @@ class TemplateController
 
     static public function path()
     {
-        return "http://localhost/Clinica/";
+        return "http://clinica.com/";
     }
 }

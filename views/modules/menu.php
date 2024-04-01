@@ -11,7 +11,7 @@ $url = $_GET["url"];
     </div>
     <div class="offcanvas-body">
 
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+        <ul class="navbar-nav flex-grow-1 pe-3 nav-underline h-100">
             <li class="nav-item">
 
                 <?php if ($url === "home") : ?>
@@ -27,65 +27,202 @@ $url = $_GET["url"];
                         <i class="bi bi-house me-2 fs-5"></i>
                         Inicio
                     </a>
-                <?php endif; ?>
-            </li>
-
-            <li class="nav-item">
-
-                <?php if ($url === "doctors") : ?>
-
-                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>doctors">
-                        <i class="bi bi-person-workspace me-2 fs-5"></i>
-                        Doctores
-                    </a>
-
-                <?php else : ?>
-
-                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>doctors">
-                        <i class="bi bi-person-workspace me-2 fs-5"></i>
-                        Doctores
-                    </a>
-
+                    
                 <?php endif; ?>
 
             </li>
 
-            <li class="nav-item">
+            <?php if ($_SESSION["role"] === "admin") : ?>
 
-                <?php if ($url === "consulting-rooms") : ?>
+                <li class="nav-item">
 
-                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>consulting-rooms">
-                        <i class="bi bi-bandaid me-2 fs-5"></i>
-                        Consultorios
+                    <?php if ($url === "secretarys") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>secretarys">
+                            <i class="bi bi-person-standing-dress me-2 fs-5"></i>
+                            Secretarias
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>secretarys">
+                            <i class="bi bi-person-standing-dress me-2 fs-5"></i>
+                            Secretarias
+                        </a>
+
+                    <?php endif; ?>
+
+                </li>
+
+            <?php endif; ?>
+
+
+            <?php if ($_SESSION["role"] === "secretary" || $_SESSION["role"] === "admin") : ?>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "doctors") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>doctors">
+                            <i class="bi bi-person-workspace me-2 fs-5"></i>
+                            Doctores
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>doctors">
+                            <i class="bi bi-person-workspace me-2 fs-5"></i>
+                            Doctores
+                        </a>
+
+                    <?php endif; ?>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "consulting-rooms") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>consulting-rooms">
+                            <i class="bi bi-bandaid me-2 fs-5"></i>
+                            Consultorios
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>consulting-rooms">
+                            <i class="bi bi-bandaid me-2 fs-5"></i>
+                            Consultorios
+                        </a>
+
+                    <?php endif; ?>
+                </li>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "patients") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>patients">
+                            <i class="bi bi-people me-2 fs-5"></i>
+                            Pacientes
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>patients">
+                            <i class="bi bi-people me-2 fs-5"></i>
+                            Pacientes
+                        </a>
+
+                    <?php endif; ?>
+                </li>
+
+            <?php endif; ?>
+
+            <?php if ($_SESSION["role"] === "patient") : ?>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "quotes") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>quotes">
+                            <i class="bi bi-calendar-date me-2 fs-5"></i>
+                            Citas Medicas
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>quotes">
+                            <i class="bi bi-calendar-date me-2 fs-5"></i>
+                            Citas Medicas
+                        </a>
+
+                    <?php endif; ?>
+                </li>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "history") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>history">
+                            <i class="bi bi-clock-history me-2 fs-5"></i>
+                            Historial
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>history">
+                            <i class="bi bi-clock-history me-2 fs-5"></i>
+                            Historial
+                        </a>
+
+                    <?php endif; ?>
+                </li>
+
+            <?php endif; ?>
+
+            <?php if ($_SESSION["role"] === "doctor") : ?>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "quotes") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>quotes">
+                            <i class="bi bi-calendar-date me-2 fs-5"></i>
+                            Citas Medicas
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>quotes">
+                            <i class="bi bi-calendar-date me-2 fs-5"></i>
+                            Citas Medicas
+                        </a>
+
+                    <?php endif; ?>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <?php if ($url === "horarys") : ?>
+
+                        <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>horarys">
+                            <i class="bi bi-clock-history me-2 fs-5"></i>
+                            Mis Horarios
+                        </a>
+
+                    <?php else : ?>
+
+                        <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>horarys">
+                            <i class="bi bi-clock-history me-2 fs-5"></i>
+                            Mis Horarios
+                        </a>
+
+                    <?php endif; ?>
+
+                </li>
+
+            <?php endif; ?>
+
+            <li class="nav-item mt-auto">
+
+                <?php if ($url === "configurations") : ?>
+
+                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>configurations">
+                        <i class="bi bi-gear me-2 fs-5"></i>
+                        Configuraciones
                     </a>
 
                 <?php else : ?>
 
-                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>consulting-rooms">
-                        <i class="bi bi-bandaid me-2 fs-5"></i>
-                        Consultorios
+                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>configurations">
+                        <i class="bi bi-gear me-2 fs-5"></i>
+                        Configuraciones
                     </a>
 
                 <?php endif; ?>
-            </li>
 
-            <li class="nav-item">
-
-                <?php if ($url === "patients") : ?>
-
-                    <a class="nav-link text-white active" aria-current="page" href="<?php echo TemplateController::path(); ?>patients">
-                        <i class="bi bi-people me-2 fs-5"></i>
-                        Pacientes
-                    </a>
-
-                <?php else : ?>
-
-                    <a class="nav-link text-white" href="<?php echo TemplateController::path(); ?>patients">
-                        <i class="bi bi-people me-2 fs-5"></i>
-                        Pacientes
-                    </a>
-
-                <?php endif; ?>
             </li>
 
         </ul>

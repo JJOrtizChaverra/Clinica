@@ -1,8 +1,6 @@
-<section class="container-xxl">
-
-    <center>
-        <h1 class="mt-2 mb-3">Seleccione como desea ingresar al sistema</h1>
-    </center>
+<main class="container-xxl">
+    
+    <h1 class="mt-2 mb-3 text-center">Seleccione como desea ingresar al sistema</h1>
 
     <div class="row">
 
@@ -49,11 +47,11 @@
                     Iniciar Sesion
                 </div>
                 <div class="card-body text-center">
-                    <h2 class="card-title text-white">Admin</h2>
+                    <h2 class="card-title text-white" style="font-size: 28px;">Administrador</h2>
                     <i class="bi bi-person-badge-fill opacity-50 " style="font-size: 80px;"></i>
                 </div>
             </div>
         </a>
     </div>
 
-</section>
+</main>
